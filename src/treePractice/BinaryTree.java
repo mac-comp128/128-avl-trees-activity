@@ -182,6 +182,16 @@ public class BinaryTree<E> implements Serializable {
         } else {
             sb.append(node.toString());
             sb.append("\n");
+
+            //The following is not strictly needed for a preorder traversal, but since we use preorder for the test cases
+            // this checks that the parent nodes have been set correctly.
+            if (node.left != null){
+                assert(node == node.left.parent);
+            }
+            if (node.right != null){
+                assert(node == node.right.parent);
+            }
+            
             preOrderTraverse(node.left, depth + 1, sb);
             preOrderTraverse(node.right, depth + 1, sb);
         }
